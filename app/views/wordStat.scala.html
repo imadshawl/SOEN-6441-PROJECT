@@ -1,0 +1,25 @@
+@(wordCount: Map[String, String])
+
+@main("Word Stat") {
+    <h1 align="center"> Word Stat </h1>
+    <table align="center" border="solid">
+        <tr>
+            <th>
+                Word
+            </th>
+            <th>
+                Frequency
+            </th>
+        </tr>
+        @for((word, frequency) <- wordCount) {
+            <tr>
+                <td>
+                    @word
+                </td>
+                <td>
+                    @frequency
+                </td>
+            </tr>
+        }
+    </table>
+}

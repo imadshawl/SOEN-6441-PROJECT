@@ -1,0 +1,29 @@
+@(result: List[Project], requestId: String)
+
+<ol>
+    @for(index <- 0 until (if (result.length > 10) 10 else result.length)) {
+    <li>
+        <p>
+            <a href='/owner?ownerId=@result.get(index).ownerId'>@result.get(index).ownerId</a>
+            @result.get(index).dateSubmitted,
+            <a href='https://www.freelancer.com/projects/@result.get(index).projectId'>@result.get(index).title</a>,
+            Type:
+            @result.get(index).projectType,
+            Skills:
+            @for(skill <- result.get(index).skillsList) {
+            <a href='/wsSkills?skillId=@skill.id&skillName=@skill.name'>
+                @skill.name,
+            </a>
+            }
+            <a href="#" onclick='document.getElementById("projectWordCount_@(result.get(index).projectId)_@requestId").submit();'>
+                Word Stat
+            </a>
+            FKGL: @result.get(index).readingEaseScores.fkgl,
+            Flesch Reading Ease Index: @result.get(index).readingEaseScores.fleschReadingEaseScore.
+        <form id='projectWordCount_@(result.get(index).projectId)_@requestId' action='/wordStat' method='post'>
+            <input type='hidden' name="wordCountMap" value='@result.get(index).wordStat' />
+        </form>
+
+    </li>
+    }
+</ol>

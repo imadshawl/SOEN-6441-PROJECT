@@ -1,0 +1,91 @@
+@(result: OwnerDetailsResults)
+
+@main("Employer Details") {
+    <h1>Employer Details</h1>
+    <ul>
+        <li>
+            ID: @result.id
+        </li>
+        <li>
+            Username: @result.username
+        </li>
+        <li>
+            Suspended: @result.suspended
+        </li>
+        <li>
+            Closed: @result.closed
+        </li>
+        <li>
+            Is Active: @result.isActive
+        </li>
+        <li>
+            Force Verify: @result.forceVerify
+        </li>
+        <li>
+            Avatar: @result.avatar
+        </li>
+        <li>
+            Email: @result.email
+        </li>
+        <li>
+            Reputation: @result.reputation
+        </li>
+        <li>
+            Profile Description: @result.profileDescription
+        </li>
+        <li>
+            Display Name: @result.displayName
+        </li>
+        <li>
+            Registration Date: @result.registrationDate
+        </li>
+        <li>
+            Location: @result.location
+        </li>
+        <li>
+            Role: @result.role
+        </li>
+        <li>
+            First Name: @result.firstName
+        </li>
+        <li>
+            Last Name: @result.lastName
+        </li>
+        <li>
+            Primary Currency Name: @result.primaryCurrencyName
+        </li>
+        <li>
+            Status:
+            <ul>
+                <li>
+                    Payment Verified: @result.status.paymentVerified
+                </li>
+                <li>
+                    Email Verified: @result.status.emailVerified
+                </li>
+                <li>
+                    Deposit Made: @result.status.depositMade
+                </li>
+                <li>
+                    Profile Complete: @result.status.profileComplete
+                </li>
+                <li>
+                    Phone Verified: @result.status.phoneVerified
+                </li>
+                <li>
+                    Identity Verified: @result.status.identityVerified
+                </li>
+                <li>
+                    Facebook Connected: @result.status.facebookConnected
+                </li>
+                <li>
+                    Freelancer VerifiedUser: @result.status.freelancerVerifiedUser
+                </li>
+                <li>
+                    Linkedin Connected: @result.status.linkedinConnected
+                </li>
+            </ul>
+        </li>
+    </ul>
+    @projectsDisplay(result.projectsList, result.id)
+}

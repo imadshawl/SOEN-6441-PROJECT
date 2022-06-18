@@ -1,0 +1,68 @@
+@(result: SkillsSearchResult, url: String)
+
+@main("Skills") {
+<script>
+    var webSocket;
+    function init() {
+        initWebSocket();
+    }
+
+    function initWebSocket() {
+        writeToScreen("Initiating websocket");
+        webSocket = new WebSocket("@url");
+        webSocket.onopen = onOpen;
+        webSocket.onclose = onClose;
+        webSocket.onmessage = onMessage;
+        webSocket.onerror = onError;
+    }
+
+    function onOpen(evt) {
+        writeToScreen("CONNECTED");
+    }
+
+    function onClose(evt) {
+        writeToScreen("DISCONNECTED");
+    }
+
+    function onError(evt) {
+        writeToScreen("ERROR: " + evt.data);
+        writeToScreen("ERROR: " + JSON.stringify(evt));
+    }
+
+    function writeToScreen(message) {
+        console.log("New message: ", message);
+    }
+
+    function onMessage(evt) {
+        var receivedData = JSON.parse(evt.data);
+        console.log("New Data: ", receivedData);
+        $("#skillFkgl").html(receivedData.readingEaseScores.fkgl);
+        $("#skillFlesh").html(receivedData.readingEaseScores.fleschReadingEaseScore);
+        $("#skillProjects").html(receivedData.renderedProjectHtml);
+    }
+
+    window.addEventListener("load", init, false);
+</script>
+<p>
+    <b>
+        Searched skill:
+    </b>
+    @result.skill.name
+    <a href="#" onclick='document.getElementById("globalWordCount_".concat("@result.requestId")).submit();'>
+        Global Stat
+    </a>
+
+    FKGL: <div id="skillFkgl">@result.readingEaseScores.fkgl</div>,
+    Flesch Reading Ease Index: <div id="skillFlesh">@result.readingEaseScores.fleschReadingEaseScore</div>.
+</p>
+<div id="skillProjects">
+    @projectsDisplay(result.projectsList, result.requestId)
+</div>
+
+<div id="skillWordCount">
+    <form id='globalWordCount_@result.requestId' action='/wordStat' method='post'>
+        <input type='hidden' name="wordCountMap" value='@result.wordStat' />
+    </form>
+</div>
+
+}

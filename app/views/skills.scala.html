@@ -1,0 +1,21 @@
+@(result: SkillsSearchResult)
+
+@main("Skills") {
+    <p>
+        <b>
+            Searched skill:
+        </b>
+        @result.skill.name
+        <a href="#" onclick='document.getElementById("globalWordCount_".concat("@result.requestId")).submit();'>
+            Global Stat
+        </a>
+        FKGL: @result.readingEaseScores.fkgl,
+        Flesch Reading Ease Index: @result.readingEaseScores.fleschReadingEaseScore.
+    </p>
+
+    @projectsDisplay(result.projectsList, result.requestId)
+
+    <form id='globalWordCount_@result.requestId' action='/wordStat' method='post'>
+        <input type='hidden' name="wordCountMap" value='@result.wordStat' />
+    </form>
+}

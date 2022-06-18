@@ -1,0 +1,32 @@
+.main-container {
+    padding-top: 10vh;
+    padding-right: 10vw;
+    padding-left: 10vw;
+}
+
+.title-section {
+    text-align: center;
+}
+
+.input-section {
+    display: flex;
+}
+
+.search-widget {
+    margin: auto;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
